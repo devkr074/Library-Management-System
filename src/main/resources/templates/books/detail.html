@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/base :: content">
+<section>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 th:text="${book.title}">Book Title</h1>
+        <div>
+            <a class="btn btn-outline-secondary" th:href="@{/books}">Back</a>
+            <a class="btn btn-primary" th:href="@{'/books/' + ${book.bookId} + '/edit'}">Edit</a>
+        </div>
+    </div>
+    <dl class="row">
+        <dt class="col-sm-3">ISBN</dt>
+        <dd class="col-sm-9" th:text="${book.isbn}">—</dd>
+        <dt class="col-sm-3">Publisher</dt>
+        <dd class="col-sm-9" th:text="${book.publisher != null ? book.publisher.name : '-'}">—</dd>
+        <dt class="col-sm-3">Category</dt>
+        <dd class="col-sm-9" th:text="${book.category != null ? book.category.name : '-'}">—</dd>
+        <dt class="col-sm-3">Authors</dt>
+        <dd class="col-sm-9">
+            <span th:each="a : ${book.authors}" th:text="${a.firstName + ' ' + a.lastName}"></span>
+        </dd>
+        <dt class="col-sm-3">Copies</dt>
+        <dd class="col-sm-9">
+            <ul>
+                <li th:each="c : ${book.copies}">
+                    <span th:text="${c.barcode}"></span> — <span th:text="${c.status}"></span>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+</section>
+
+</html>

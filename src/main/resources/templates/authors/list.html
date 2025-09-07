@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/base :: content">
+<section>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Authors</h1>
+        <a class="btn btn-primary" th:href="@{/authors/create}">Add Author</a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Books</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="a : ${authors}">
+                <td th:text="${a.firstName + ' ' + a.lastName}"></td>
+                <td>
+                    <span th:each="b : ${a.books}" th:text="${b.title}"></span>
+                </td>
+                <td>
+                    <a th:href="@{'/authors/' + ${a.authorId} + '/edit'}"
+                        class="btn btn-sm btn-outline-secondary">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+</html>
